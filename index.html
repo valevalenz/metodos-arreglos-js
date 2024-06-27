@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Métodos de Arreglos ¿Qué son?</h1>
+
+        <h4> Diferencia entre Función y Método </h4>
+        <p>un bloque de código autónomo que puede ser llamado de manera independiente, mientras que un método es una función asociada a un objeto específico y generalmente opera sobre las propiedades de ese objeto.</p>
+
+        <h4>Un objeto es</h4>
+        <p>una colección de propiedades, y una propiedad es una asociación entre un nombre (o clave) y un valor. Los objetos se utilizan para almacenar múltiples </p>
+
+        <h4>Un método de arreglo en JavaScript es</h4>
+        <p> Un método que puedes usar para realizar diversas operaciones sobre los arreglos (arrays). Veremos una lista de los más comunes</p>
+
+
+        <p>Podemos: Agregar, quitar o reemplazar elementos a un arreglo</p>
+
+
+    <h2>Agregar</h2>
+
+    <h3>Agregar al Final</h3>
+        <p>Puedes utilizar el método push()</p>
+
+
+    <h3>Agregar al Principio</h3>
+        <p>Con el método Unshift()</p>
+
+    <h2>Quitar o Reemplazar</h2>
+
+    <h3>Método splice()</h3>
+        <p>Método versátil que se usa para <b>eliminar o reemplazar elementos existentes</b> y/o <b>agregar elementos en una posición específica del arreglo</b></p>
+
+
+        <h2>Saber índice</h2>
+    <h3>Método findIndex()</h3>
+        <p>Devuelve el índice del primer elemento que satisface la condición (en forma de una función de retorno llamada callback). Devuelve -1 si no encuentra ningún elemento que la cumpla. </p>
+
+<script>
+
+    // PUSH ------------------------------------------------------------------
+
+    let miArreglo = [1,2,3]
+
+    miArreglo.push(4);
+
+    console.log(miArreglo)
+
+    //Unshift ----------------------------------------------------------------
+
+    let otroArreglo = [5,6,7]
+
+    otroArreglo.unshift(2,3,4)
+
+    console.log(otroArreglo)
+
+    //Splice ------------------------------------------------------------------
+
+    let numeros = [10, 11, 12, 13, 14]
+
+    numeros.splice(0,0,15,16,17)
+
+    console.log(numeros)
+
+    // Find Index -------------------------------------------------------------
+
+    let decenas = [10, 20, 30, 40]
+    
+    let indice = decenas.findIndex(function(elemento){
+        return elemento > 25;
+    })
+    console.log(indice)
+   
+    
+
+</script>
+
+</body>
+</html>

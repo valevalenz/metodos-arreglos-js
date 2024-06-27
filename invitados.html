@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Trabajando con Objetos</h1>
+    <input type="text" id="invitadoInput" placeholder="Nombre del invitado">
+    <button id="btnAgregar">Agregar</button>
+    <ul id="listaDeInvitados">
+
+
+    </ul>
+
+
+    <!-- agregamos el CONTADOR -->
+
+    <p>Total de invitados: <span id="contadorInvitados">0</span></p>
+  
+
+
+     <!-- agregamos el VERIFICADOR -->
+
+    <p>Total de asistentes: <span id="verificadorInvitados">0</span></p>
+    
+
+</body>
+
+    <script>
+
+        // Requisito nº6 del Desafío
+
+        const invitados = [
+            {id: 432, nombre: "Catalina"},
+            {id: 124, nombre: "Valentina"},
+            {id: 541, nombre: "Isabel"},
+            {id: 664, nombre: "Carolina"}
+        ];
+
+        const btnAgregar = document.getElementById("btnAgregar");
+        const invitadoInput = document.getElementById("invitadoInput");
+        const listaDeInvitados = document.getElementById("listaDeInvitados");
+        const contadorInvitados = document.getElementById("contadorInvitados");
+        const verificadorInvitados = document.getElementById("verificadorInvitados");
+
+
+// Requisito nº1 del Desafío ------------------------------
+// Agregar 
+
+btnAgregar.addEventListener("click", () => {
+            // Agregamos el invitado al arreglo
+            const nuevoInvitado = {id: Date.now(), nombre: invitadoInput.value};
+            invitados.push(nuevoInvitado);
+            invitadoInput.value = "";
+
+            // Actualizamos la información en el HTML
+            actualizarLista();
+        });
+
+
+function actualizarLista() {
+    let html = "";
+    for (let invitado of invitados) {
+        let checkedAttribute = "";
+        if (invitado.asistente) {
+            checkedAttribute = "checked";
+        }
+        html += `<li> <input type="checkbox" ${checkedAttribute} onclick="marcarAsistencia(${invitado.id}, this.checked)"> ${invitado.id}  ${invitado.nombre}  <button onclick="borrar(${invitado.id})"> x </button></li>`;
+    }
+    listaDeInvitados.innerHTML = html;
+    actualizarContador();
+}
+
+// Requisito nª2 del Desafío ------------------------------ 
+// Borrar invitados
+
+function borrar(id) {
+            // Filtramos el invitado a eliminar
+            const index = invitados.findIndex(invitado => invitado.id === id);
+            if (index !== -1) {
+                invitados.splice(index, 1);
+                actualizarLista();
+                actualizarContador();
+            }
+        }
+
+
+// Requisito nº3 del Desafío ------------------------------
+// Contar invitados
+
+function actualizarContador() {
+                contadorInvitados.textContent = invitados.length;
+
+                // la segunda parte de esta función se agrega para cumplir con el punto 4
+
+                const totalAsistentes = invitados.filter(invitado => invitado.asistente).length
+
+                verificadorInvitados.textContent = totalAsistentes
+           
+            }
+
+function marcarAsistencia(id, estado) {
+            const invitado = invitados.find(invitado => invitado.id === id);
+            if (invitado) {
+                invitado.asistente = estado;
+                actualizarContador();
+            }
+        }
+    
+
+    </script>
+
+</html>
