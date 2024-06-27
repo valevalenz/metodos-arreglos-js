@@ -69,8 +69,12 @@ btnAgregar.addEventListener("click", () => {
 
 function actualizarLista() {
     let html = "";
+    //    "invitado" es como se llama la variable e "invitados" es como se llama el array
     for (let invitado of invitados) {
         let checkedAttribute = "";
+
+    //    Esto se lee como: si el atributo "checked" está activado, entonces el invitado es también asistente 
+
         if (invitado.asistente) {
             checkedAttribute = "checked";
         }
