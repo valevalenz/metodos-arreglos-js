@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Lista de Invitados con Contador</h1>
+    <input type="text" id="invitadoInput" placeholder="Nombre del invitado">
+    <button id="btnAgregar">Agregar</button>
+
+    <ul id="listaDeInvitados">
+
+            <!-- dentro de estas etiquetas creamos los list items utilizando los datos del array "invitados" -->
+
+    </ul>
+
+</body>
+    <script>
+
+        // 1er paso: crear el array/arreglo 
+        // 2º paso: crear las constantes 
+
+        const invitados = [
+            {id: 432, nombre: "Catalina"},
+            {id: 124, nombre: "Valentina"},
+            {id: 541, nombre: "Isabel"},
+            {id: 664, nombre: "Carolina"},
+        ];
+
+        const btnAgregar = document.getElementById("btnAgregar");
+        const invitadoInput = document.getElementById("invitadoInput");
+        const listaDeInvitados = document.getElementById("listaDeInvitados");
+        const contadorInvitados = document.getElementById("contadorInvitados");
+        const verificadorInvitados = document.getElementById("verificadorInvitados");
+
+
+// En el HTML tenemos un botón "agregar" con el que añadimos nuevos invitados. Cada vez que una función sea gatillada por un elemento de este estilo creamos primero la función para el evento click.
+
+btnAgregar.addEventListener("click", () => {
+            // Agregamos el invitado al arreglo
+            const nuevoInvitado = {id: Date.now(), nombre: invitadoInput.value};
+            // con date.now generamos un id único para cada invitado que agreguemos. Esta función cuenta el tiempo que ha pasado desde una fecha en específico y la renderiza.
+            invitados.push(nuevoInvitado);
+            invitadoInput.value = "";
+            // utilizamos el método push para agregar nuevos invitados a la lista
+            // Actualizamos la información en el HTML
+            
+            actualizarLista()
+
+            // aquí pueden probar con console.log(invitados) en vez de llamar a la función actualizarLista() y van a entender mejor cómo interactúan ambas funciones
+
+        });
+
+// En este caso, como estamos utilizando javascript para renderizar elementos en una lista, la función anterior no muestra nada en el HTML si no llamamos otra función. La función que renderiza los elementos del arreglo es la siguiente:
+
+function actualizarLista() {
+    let html = "";
+    for (let invitado of invitados) {
+        let checkedAttribute = "";
+        if (invitado.asistente) {
+            checkedAttribute = "checked";
+        }
+        html += `<li> <input type="checkbox" ${checkedAttribute} onclick="marcarAsistencia(${invitado.id}, this.checked)"> ${invitado.id}  ${invitado.nombre}  <button onclick="borrar(${invitado.id})"> x </button></li>`;
+    }
+    listaDeInvitados.innerHTML = html;
+}
+
+
+// En el Documento Read Me les dejé la explicación de las comillas vacías
+
+// Borrar invitados
+
+function borrar(id) {
+            // Filtramos el invitado a eliminar
+            const index = invitados.findIndex(invitado => invitado.id === id);
+            if (index !== -1) {
+                invitados.splice(index, 1);
+                actualizarLista();
+                actualizarContador();
+            }
+        }
+
+       
+actualizarLista()
+//llamamos esta función afuera para que se actualice la lista apenas abrimos el navegador
+    
+    </script>
+
+</html>

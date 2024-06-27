@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Trabajando con Objetos</h1>
+    <h1>Lista de Invitados con Contador</h1>
     <input type="text" id="invitadoInput" placeholder="Nombre del invitado">
     <button id="btnAgregar">Agregar</button>
     <ul id="listaDeInvitados">
@@ -30,13 +30,14 @@
 
     <script>
 
-        // Requisito nº6 del Desafío
+        // 1er paso: crear el array/arreglo 
+        // 2º paso: crear las constantes 
 
         const invitados = [
             {id: 432, nombre: "Catalina"},
             {id: 124, nombre: "Valentina"},
             {id: 541, nombre: "Isabel"},
-            {id: 664, nombre: "Carolina"}
+            {id: 664, nombre: "Carolina"},
         ];
 
         const btnAgregar = document.getElementById("btnAgregar");
@@ -46,19 +47,24 @@
         const verificadorInvitados = document.getElementById("verificadorInvitados");
 
 
-// Requisito nº1 del Desafío ------------------------------
-// Agregar 
+// En el HTML tenemos un botón "agregar" con el que añadimos nuevos invitados. Cada vez que una función sea gatillada por un elemento de este estilo creamos primero la función para el evento click.
 
 btnAgregar.addEventListener("click", () => {
             // Agregamos el invitado al arreglo
             const nuevoInvitado = {id: Date.now(), nombre: invitadoInput.value};
+            // con date.now generamos un id único para cada invitado que agreguemos. Esta función cuenta el tiempo que ha pasado desde una fecha en específico y la renderiza.
             invitados.push(nuevoInvitado);
             invitadoInput.value = "";
-
+            // utilizamos el método push para agregar nuevos invitados a la lista
             // Actualizamos la información en el HTML
-            actualizarLista();
+            
+            actualizarLista()
+
+            // aquí pueden probar con console.log(invitados) en vez de llamar a la función actualizarLista() y van a entender mejor cómo interactúan ambas funciones
+
         });
 
+// En este caso, como estamos utilizando javascript para renderizar elementos en una lista, la función anterior no muestra nada en el HTML si no llamamos otra función. La función que renderiza los elementos del arreglo es la siguiente:
 
 function actualizarLista() {
     let html = "";
@@ -73,7 +79,9 @@ function actualizarLista() {
     actualizarContador();
 }
 
-// Requisito nª2 del Desafío ------------------------------ 
+
+// En el Documento Read Me les dejé la explicación de las comillas vacías
+
 // Borrar invitados
 
 function borrar(id) {
@@ -91,9 +99,11 @@ function borrar(id) {
 // Contar invitados
 
 function actualizarContador() {
+
+    //si sólo quieren contar invitados basta con esta línea de código
                 contadorInvitados.textContent = invitados.length;
 
-                // la segunda parte de esta función se agrega para cumplir con el punto 4
+                // la segunda parte de esta función se agrega para que también se cuenten los asistentes confirmados
 
                 const totalAsistentes = invitados.filter(invitado => invitado.asistente).length
 
@@ -101,7 +111,10 @@ function actualizarContador() {
            
             }
 
-function marcarAsistencia(id, estado) {
+
+    //esta es la función para actualizar el estado de un asistente una vez que se ha clickeado el input  
+
+    function marcarAsistencia(id, estado) {
             const invitado = invitados.find(invitado => invitado.id === id);
             if (invitado) {
                 invitado.asistente = estado;
@@ -109,7 +122,7 @@ function marcarAsistencia(id, estado) {
             }
         }
     
-
     </script>
 
 </html>
+
